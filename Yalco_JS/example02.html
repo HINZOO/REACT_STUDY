@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>제대로 파는 자바스크립트</title>
+  <!-- <script src="./script02.js"></script>
+  <script src="./script03.js"></script> -->
+
+
+  <!-- 👍모듈로서 로드 -->
+  <script type="module" src="./dist/main.js"></script>
+  <!-- 웹팩사용 -->
+</head>
+<body>
+<pre>
+  다른 파일의 코드가 필요할 경우 순서에 의존적임
+  한 파일의 코드가 다른 파일의 변수에 영향을 미칠 수 있음 - 오류 위험
+  결국 큰 .js 파일 하나를 나눠 작성하는 것에 불과
+</pre>
+<h3>결론 => 모듈을 사용한다.</h3>
+
+
+<script>
+  console.log('모듈은 defer 방식으로 로드된다.')
+</script>
+</body>
+</html>
