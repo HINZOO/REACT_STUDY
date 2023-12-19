@@ -104,3 +104,8 @@ document.querySelector('#grade')
 .addEventListener('change', () => {
   fillRaceTable();
 });
+
+document.querySelector('#sort')
+.addEventListener('change', () => {
+  fillRaceTable();
+});
