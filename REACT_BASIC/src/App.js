@@ -3,6 +3,7 @@
 
 import MyHeader from './MyHeader';
 import Counter from './Counter';
+import Container from './Container';
 
 function App() {
 
@@ -26,12 +27,21 @@ function App() {
   // }
   // const number = 5;
 
+  const counterProps = {
+    a:1,
+    b:2,
+    c:3,
+    d:4,
+    e:5,
+    initialValue:5,
+  }
+
   return (
     // 🍊<React.Fragment>
-      <div>
+    <Container>
         <MyHeader/>
-        <Counter/>  
-      </div>
+        <Counter {...counterProps}/>  
+    </Container>
     //🍊 </React.Fragment> /*이 태그를 사용시 div 태그를 써주지않아도된다. */
   );
 }
@@ -59,3 +69,5 @@ export default App;
 
 <Counter/>  
 </div> */}
+
+// PROPS <Counter {...counterProps}/> 여러값을 보내고 싶을때 객체에 담아 보낸다.
