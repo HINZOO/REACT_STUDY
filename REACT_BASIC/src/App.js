@@ -2,37 +2,35 @@
 // import './App.css';
 
 import MyHeader from './MyHeader';
+import Counter from './Counter';
 
 function App() {
 
   let name = "이영지";
 
   //👍 import를 사용하지않은 inline CSS 작성법
-  const style = {
-    App :{
-      backgroundColor: "black",
-    },
-    h2 :{
-      color: "red",
-    },
-    bold_text: {
-      color:"green",
-    },
-  };
+  // const style = {
+  //   App :{
+  //     backgroundColor: "black",
+  //   },
+  //   h2 :{
+  //     color: "red",
+  //   },
+  //   bold_text: {
+  //     color:"green",
+  //   },
+  // };
 
-  const func = () => {
-    return "func";
-  }
-  const number = 5;
+  // const func = () => {
+  //   return "func";
+  // }
+  // const number = 5;
 
   return (
     // 🍊<React.Fragment>
-      <div style={style.App}>
+      <div>
         <MyHeader/>
-        <h2 style={style.h2}>안녕 리엑트, 함수값은 안들어가네요! {func} </h2>
-        <b style={style.bold_text} id="bold_text">
-          {number} 는 {number %2 === 0 ? "짝수":"홀수"} 리엑트의 조건부 랜더링
-        </b>
+        <Counter/>  
       </div>
     //🍊 </React.Fragment> /*이 태그를 사용시 div 태그를 써주지않아도된다. */
   );
@@ -52,4 +50,12 @@ export default App;
 //    리엑트의 기능을 사용하지 않는 컴포넌트들은 최상위태그를 쓰지 않아도 된다.
 //jsx 에는 {}로 값을 넣어줄 수 있지만 숫자나 문자같은 값 외에는 함수를 넣거나 할 수 없다.
 //jsx 문법을 사용하여 삼항연산자를 넣어주는 등 조건부 랜더링을 할 수 있다.
+{/* <div style={style.App}>
+<MyHeader/>
+<h2 style={style.h2}>안녕 리엑트, 함수값은 안들어가네요! {func} </h2>
+<b style={style.bold_text} id="bold_text">
+  {number} 는 {number %2 === 0 ? "짝수":"홀수"} 리엑트의 조건부 랜더링
+</b>
 
+<Counter/>  
+</div> */}
