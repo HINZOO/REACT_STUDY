@@ -50,17 +50,24 @@ function App() {
     setData([newItem,...data]); //기존일기에 새로운 일기를 추가(새로운일기가 위로올라오므로 앞에 기재함.)
   };
 
-  const onDelete = (targetId) =>{
+  const onRemove = (targetId) =>{
     console.log(`${targetId}가 삭제되었습니다.`)
     const newDiaryList = data.filter((it) => it.id !== targetId);
     // console.log(newDiaryList);
     setData(newDiaryList)
   }
+
+  //수정
+  const onEdit = (targetId,newContent) => {
+    setData(
+      data.map((it)=> it.id===targetId ? {...it, content: newContent} : it)
+    );//값을 전달하여 타겟아이디와 아이디가 같으면 해당 아이템의 기본요소는 그대로 두고 content만 new Content로 수정, 대상이 아니라면 기존값 유지.
+  }
   
   return (
     <div className="App">
       <DiaryEditor onCreate={onCreate}/>
-      <DiaryList onDelete={onDelete} diaryList={data} />
+      <DiaryList onEdit={onEdit} onRemove={onRemove} diaryList={data} />
     </div>
   );
 }
