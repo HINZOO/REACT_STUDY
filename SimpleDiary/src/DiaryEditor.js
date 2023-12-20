@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-const DiaryEditor = () =>{
+const DiaryEditor = ({onCreate}) =>{
   
   const authorInput = useRef();
   const contentInput = useRef();
@@ -34,8 +34,15 @@ const DiaryEditor = () =>{
       contentInput.current.focus();
       return;
     }
-
+    onCreate(state.author,state.content,state.emotion);//props로 받은 함수에 해당값을 넣어주면서 onCreate에서 setData에 값을 입력하여 data를 변경
     alert("저장 성공");
+
+    //저장성공 후 input창 값 초기화 
+    setState({
+      author: "",
+      content: "",
+      emotion: 1,
+    })
   }
 
   return <div className="DiaryEditor">
