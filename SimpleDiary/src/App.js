@@ -49,11 +49,18 @@ function App() {
     dataId.current += 1;
     setData([newItem,...data]); //기존일기에 새로운 일기를 추가(새로운일기가 위로올라오므로 앞에 기재함.)
   };
+
+  const onDelete = (targetId) =>{
+    console.log(`${targetId}가 삭제되었습니다.`)
+    const newDiaryList = data.filter((it) => it.id !== targetId);
+    // console.log(newDiaryList);
+    setData(newDiaryList)
+  }
   
   return (
     <div className="App">
       <DiaryEditor onCreate={onCreate}/>
-      <DiaryList diaryList={data} />
+      <DiaryList onDelete={onDelete} diaryList={data} />
     </div>
   );
 }
