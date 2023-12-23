@@ -1,0 +1,22 @@
+
+🤔 React 컴포넌트의 생애주기
+  탄생 Mount -> 변화 update(리렌더) -> 죽음 UnMount
+  Lifecycle은 어렵지 않다 예를들면 ,
+  초기화 작업 -> 예외처리 작업 -> 메모리정리작업 
+  과 같다.
+
+🤔클래스형 함수에서만 사용 가능한 라이프사이클 메서드
+  탄생 -> 변화 -> 죽음
+  ComponentDidMount -> ComponentDidUpdate -> ComponentWillUnmount 
+  State도 원래는 클래스에서만 사용하는 것이다. 하지만 함수형에서도 우리는 useState를 통해 잘만 사용했다.
+  이렇게 Class에서만 사용가능한 컴포넌트를 낚아채서(hooking) 해서 사용하는 기능을  React Hooks 라고 부른다
+  use- 키워드를 붙여 사용가능하다. ex) useState , useEffect , useRef 
+
+🤔 useEffect :  Class에서 사용가능한 React 의 Lifecycle을 제어할 수 있는 기술
+  import React, {useEffect} from "react";
+  useEffect(()=>{},[]); 
+    -> ()=>{} : 콜백함수 
+    -> [] :  Dependency Array (의존성배열) 이 배열 내에 들어있는 값이 변화하면 콜백함수가 수행된다.
+
+🤔 왜 함수형 컴포넌트를 사용 할까?
+Class 형 컴포넌트의 길어지는 코드길이의 문제, 중복코드와 가독성문제 등등을 해결하기위해 React Hooks가 등장(2019.06)

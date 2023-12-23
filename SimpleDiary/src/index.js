@@ -6,8 +6,9 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <>
     <App />
-  </React.StrictMode>
+  </>
 );
 
+//  <React.StrictMode> 로 <App/>을 감싸면 StrictMode 가 발현되어  개발환경에서 코드를 두번 실행해서 버그를 찾는데 도움을 준다.
