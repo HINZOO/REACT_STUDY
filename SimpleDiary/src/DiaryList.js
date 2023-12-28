@@ -2,7 +2,7 @@ import DiaryItem from "./DiaryItem";
 
 const DiaryList = ({onEdit, onRemove, diaryList}) =>{
 
-  console.log("리스트출력");
+  // console.log("리스트출력");
   return <div className="DiaryList">
     <h2>일기 리스트</h2>
     <h4>{diaryList.length} 개의 일기가 들어왔어요.</h4>

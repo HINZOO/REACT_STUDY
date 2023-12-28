@@ -2,8 +2,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
-import Lifecycle from './Lifecycle';
-import LifecycleUnMount from './LifecycleUnMount';
+// import Lifecycle from './Lifecycle';
+// import LifecycleUnMount from './LifecycleUnMount';
+// import OptimizeTest from './OptimizeTest';
+// import OptimizeTest2 from './OptimizeTest2';
 
 // const dummyList = [
 //   {
@@ -80,7 +82,7 @@ function App() {
   };
 
   const onRemove = (targetId) =>{
-    console.log(`${targetId}가 삭제되었습니다.`)
+    // console.log(`${targetId}가 삭제되었습니다.`)
     const newDiaryList = data.filter((it) => it.id !== targetId);
     // console.log(newDiaryList);
     setData(newDiaryList)
@@ -96,8 +98,7 @@ function App() {
 
   //일기들 중 기분이 졸은 일기가 몇개인지 카운팅해보고 비율도 구해보자.
   const getDiaryAnalysis = useMemo(() =>{
-    console.log("일기 분석 시작");
-
+    // console.log("일기 분석 시작");//몇번 출력되는지 체크하기.
     const goodCount = data.filter((it)=> it.emotion >= 3).length;
     const badCount = data.length - goodCount;
     const goodRatio =(goodCount/data.length) * 100;
@@ -105,11 +106,13 @@ function App() {
   },[data.length]//useMemo 의 두번째 인자로는 data.length가 변화할때만 작동하도록 설정.
   ); //useMemo : React안에 있는 함수이며 첫번째 인자로 콜백함수를 받아 최적화 할수있도록 전달.
 
-  const {goodCount,badCount,goodRatio} = getDiaryAnalysis;//함수를실행하고 객체를 구조할당으로 받음
-
+  const {goodCount,badCount,goodRatio} = getDiaryAnalysis;
+  //UseMemo는 함수가 아니기 때문에 ()을 제외해준다.
+  
 
   return (
     <div className="App">
+      {/* <OptimizeTest2/> */}
       {/* <Lifecycle/> */}
       {/* <LifecycleUnMount/> */}
       <DiaryEditor onCreate={onCreate}/>
