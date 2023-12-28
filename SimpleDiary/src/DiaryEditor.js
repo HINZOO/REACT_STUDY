@@ -64,6 +64,7 @@ const DiaryEditor = ({onCreate}) =>{
       />
     </div>
     <div>
+      <span>오늘의 감정점수 : </span>
       <select 
         name="emotion"
         value={state.emotion}
