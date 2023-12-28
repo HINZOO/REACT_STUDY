@@ -1,7 +1,10 @@
-import { useRef, useState } from "react";
+import React,{ useRef, useState ,useEffect} from "react";
 
 const DiaryEditor = ({onCreate}) =>{
   
+  useEffect(()=>{
+     console.log("DiaryEditor 랜더")
+  });
   const authorInput = useRef();
   const contentInput = useRef();
 
@@ -82,7 +85,7 @@ const DiaryEditor = ({onCreate}) =>{
     </div>
   </div>;
 };
-export default DiaryEditor;
+export default React.memo(DiaryEditor);
 
 /*
 🍊 onChange={()=>{}} : 값이 바뀌었을때 콜백함수를 실행한다.

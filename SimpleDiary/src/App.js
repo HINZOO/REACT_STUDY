@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
@@ -68,7 +68,8 @@ function App() {
     }, 1500);
   }, []);
 
-  const onCreate = (author,content,emotion) => {//새로운 일기를 추가하는 함수 , 이 함수를props로 보냄
+  const onCreate = useCallback(
+    (author,content,emotion) => {//새로운 일기를 추가하는 함수 , 이 함수를props로 보냄
     const created_date = new Date().getTime();
     const newItem = {
       author,
@@ -78,8 +79,10 @@ function App() {
       id: dataId.current,
     };
     dataId.current += 1;
-    setData([newItem,...data]); //기존일기에 새로운 일기를 추가(새로운일기가 위로올라오므로 앞에 기재함.)
-  };
+    setData((data)=>[newItem,...data]); //기존일기에 새로운 일기를 추가(새로운일기가 위로올라오므로 앞에 기재함.)
+    },
+    [] //함수의 data를 최신으로 업데이트 하면서 적용될 수 있도록 setData의 값을 함수형으로 전환하여 최신데이터가 들어오도록 설정한다.
+  );
 
   const onRemove = (targetId) =>{
     // console.log(`${targetId}가 삭제되었습니다.`)
