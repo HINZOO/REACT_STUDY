@@ -19,5 +19,12 @@
 <p>감정 이미지들을 프로젝트에서 불러와 사용할 수 있는 환경 세팅</p>
 <p>4. 공통 컴포넌트 세팅</p>
 <p>모든 페이지에 공통으로 사용되는 버튼, 헤더 컴포넌트 세팅</p>
+<p>5. 상태 관리 세팅하기</p>
+<p>프로젝트 전반적으로 사용될 일기 데이터 state 관리 로직 작성하기</p>
+<p><img src="./picture01.png"></p>
+<p>6. 프로젝트 State Context 세팅하기</p>
+<p>일기 데이터 State를 공급할 Context를 생성하고 Provider로 공급하기</p>
+<p>7. 프로젝트 Dispatch Context 세팅하기</p>
+<p>일기 데이터 State 의 Dispatch 함수들을 공급할 Context를 생성하고 Provider 로 공급하기</p>
+
 </div>
-<p></p>
