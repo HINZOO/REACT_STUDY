@@ -1,3 +1,116 @@
-.App{
-  padding: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR&display=swap');
+
+body{
+  background-color: #F6F6F6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Do Hyeon', sans-serif;
+  min-height: 100vh;  /*현재 웹스크린의 실제 높이를 최소높이로 하겠다.*/
+  margin: 0px;
+
 }
+
+@media (min-width: 650px){ /*화면이 650이상으로 넓을때*/
+  .App{
+    width: 640px;
+  }
+}
+
+@media (max-width: 650px){ /*화면이 650이하 일때*/
+  .App{
+    width: 90vw;/*현재 웹스크린의 크기의 90%의 너비를 가지겠다.*/
+  }
+}
+
+#root {
+  background-color: white;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+}
+
+.App{
+  min-height: 100vh;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+/*  My Button */
+.MyButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  font-size: 18px ;
+
+  white-space: nowrap; /*버튼안의 글씨가 짤리지않게 설정*/
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+.MyButton_default {
+  background-color:  #9e7df3;
+  color: white;
+}
+
+.MyButton_positive{
+  background-color:  #64c964;
+  color: white;
+}
+
+.MyButton_negative{
+  background-color:  #fd565f;
+  color: white;
+}
+
+/* MY HEADER */
+
+header{
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+header > div {
+  display: flex;
+}
+
+header .head_text{
+  width: 50%;
+  font-size: 20px;
+  justify-content: center;
+}
+
+header .head_btn_left{
+  width: 25%;
+  justify-content: start;
+}
+
+header .head_btn_right{
+  width: 25%;
+  justify-content: end;
+}
+
+header button{
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+
+
+
+/* .App{
+  padding: 20px;
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-family: 'Do Hyeon', sans-serif;
+} 
+*/
+
+/* 같이쓰면 제일 마지막 제일 왼쪽에있는 폰트가 먼저 실행 */
