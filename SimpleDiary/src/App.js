@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef} from 'react';
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
@@ -37,9 +37,37 @@ import DiaryList from './DiaryList';
 //     created_date: new Date().getTime(),
 //   },
 // ]
+
+ const reducer = (state,action) => { 
+  switch(action.type){
+    case 'INIT': {
+      return action.data;//새로운 state 반환.
+    }
+    case 'CREATE':{
+      const created_date = new Date().getTime();
+      const newItem = {
+        ...action.data,
+        created_date
+      }
+      return [newItem, ...state];
+    }
+    case'REMOVE':{
+      return state.filter((it)=>it.id !== action.targetId);
+    }
+    case'EDIT': {
+      return state.map((it)=>it.id === action.targetId ? {...it, content:action.newContent }: it);
+    }
+    default : 
+    return state;
+  }
+ };
 function App() {
 
-  const [data,setData] = useState([]);
+  // const [data,setData] = useState([]);
+  //🐸 useState 대신 useReducer로 대량의 컴포넌트 밖으로 분리하여 간단하게 관리하기
+  const [data,dispatch] = useReducer(reducer,[]);//⚾ 초기값 빈 배열로 전달
+
+
   const dataId = useRef(0);//id지정
 
   //API 호출
@@ -57,8 +85,8 @@ function App() {
         id : dataId.current++,
       };
     })
-
-    setData(initData);
+    dispatch({type: "INIT", data:initData});//reducer함수에 전달.
+    // setData(initData);
   };
   
   //컴포넌트생성시점에서 발현.
@@ -70,31 +98,40 @@ function App() {
 
   const onCreate = useCallback(
     (author,content,emotion) => {//새로운 일기를 추가하는 함수 , 이 함수를props로 보냄
-    const created_date = new Date().getTime();
-    const newItem = {
-      author,
-      content,
-      emotion,
-      created_date,
-      id: dataId.current,
-    };
+
+      dispatch({type:"CREATE",data:{ author,
+                                      content,
+                                      emotion,
+                                      // created_date,//reducer에서 설정
+                                      id: dataId.current,}
+              })
+    // const created_date = new Date().getTime();
+    // const newItem = {
+    //   author,
+    //   content,
+    //   emotion,
+    //   created_date,
+    //   id: dataId.current,
+    // };
     dataId.current += 1;
-    setData((data)=>[newItem,...data]); //기존일기에 새로운 일기를 추가(새로운일기가 위로올라오므로 앞에 기재함.)
+    // setData((data)=>[newItem,...data]); //기존일기에 새로운 일기를 추가(새로운일기가 위로올라오므로 앞에 기재함.)
     },
     [] //함수의 data를 최신으로 업데이트 하면서 적용될 수 있도록 setData의 값을 함수형으로 전환하여 최신데이터가 들어오도록 설정한다.
   );
 
   const onRemove = useCallback( (targetId) =>{
     // console.log(`${targetId}가 삭제되었습니다.`)
-    setData(data => data.filter((it) => it.id !== targetId))
+    dispatch({type:"REMOVE", targetId})
+    // setData(data => data.filter((it) => it.id !== targetId))
   },[]
   );
 
   //수정
   const onEdit = useCallback((targetId,newContent) => {
-    setData((data) =>
-      data.map((it)=> it.id===targetId ? {...it, content: newContent} : it)
-    );//값을 전달하여 타겟아이디와 아이디가 같으면 해당 아이템의 기본요소는 그대로 두고 content만 new Content로 수정, 대상이 아니라면 기존값 유지.
+    dispatch({type:"EDIT",targetId,newContent})
+    // setData((data) =>
+    //   data.map((it)=> it.id===targetId ? {...it, content: newContent} : it)
+    // );//값을 전달하여 타겟아이디와 아이디가 같으면 해당 아이템의 기본요소는 그대로 두고 content만 new Content로 수정, 대상이 아니라면 기존값 유지.
   },[]
   );
   
