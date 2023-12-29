@@ -17,7 +17,8 @@ function App() {
           <Route path = "/" element={<Home/>} />
           <Route path = "/new" element={<New/>} />
           <Route path = "/edit" element={<Edit/>} />
-          <Route path = "/diary" element={<Diary/>} />
+          <Route path = "/diary/:id" element={<Diary/>} />
+          {/* <Route path = "/diary" element={<Diary/>} /> 아이디가 없는 경우는 이렇게 한번 더 써줘야함. */}
         </Routes>
         <RouteTest/>
       </div>
