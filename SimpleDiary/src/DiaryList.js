@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import DiaryItem from "./DiaryItem";
+import { DiaryStateContext } from "./App";
 
-const DiaryList = ({onEdit, onRemove, diaryList}) =>{
+const DiaryList = () =>{
+
+  const diaryList = useContext(DiaryStateContext);//DiaryStateContext.Provider 에 지정한 data의 값을 꺼내옴.
 
   // console.log("리스트출력");
   return <div className="DiaryList">
@@ -8,7 +12,7 @@ const DiaryList = ({onEdit, onRemove, diaryList}) =>{
     <h4>{diaryList.length} 개의 일기가 들어왔어요.</h4>
     <div>
       {diaryList.map((it) => (
-        <DiaryItem key={it.id} {...it} onEdit={onEdit} onRemove={onRemove}/>
+        <DiaryItem key={it.id} {...it}/>
       ))}
     </div>
   </div>

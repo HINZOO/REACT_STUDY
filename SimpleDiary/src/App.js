@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef} from 'react';
+import React,{ useCallback, useEffect, useMemo, useReducer, useRef} from 'react';
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
@@ -61,6 +61,12 @@ import DiaryList from './DiaryList';
     return state;
   }
  };
+
+
+ //export default는 파일당 1개만 쓸 수 있다.//부가적으로 내보내는 모듈이라고 생각해주면 됨.
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();//함수들을 별도로 중첩하여보냄 (리랜더링방지를 위함)
+
 function App() {
 
   // const [data,setData] = useState([]);
@@ -134,6 +140,10 @@ function App() {
     // );//값을 전달하여 타겟아이디와 아이디가 같으면 해당 아이템의 기본요소는 그대로 두고 content만 new Content로 수정, 대상이 아니라면 기존값 유지.
   },[]
   );
+
+  const memoizedDispatches = useMemo(()=>{
+    return {onCreate, onRemove, onEdit}
+  },[]);
   
 
   //일기들 중 기분이 졸은 일기가 몇개인지 카운팅해보고 비율도 구해보자.
@@ -151,17 +161,21 @@ function App() {
   
 
   return (
-    <div className="App">
-      {/* <OptimizeTest2/> */}
-      {/* <Lifecycle/> */}
-      {/* <LifecycleUnMount/> */}
-      <DiaryEditor onCreate={onCreate}/>
-      <div>전체 일기 : {data.length}</div>
-      <div>기분이 좋은 일기 개수 : {goodCount}</div>
-      <div>기분이 나쁜 일기 개수 : {badCount}</div>
-      <div>기분이 좋은 일기 비율 : {goodRatio}</div>
-      <DiaryList onEdit={onEdit} onRemove={onRemove} diaryList={data} />
-    </div>
+    <DiaryStateContext.Provider value={data}>
+      <DiaryDispatchContext.Provider value={memoizedDispatches} >
+        <div className="App">
+          {/* <OptimizeTest2/> */}
+          {/* <Lifecycle/> */}
+          {/* <LifecycleUnMount/> */}
+          <DiaryEditor />
+          <div>전체 일기 : {data.length}</div>
+          <div>기분이 좋은 일기 개수 : {goodCount}</div>
+          <div>기분이 나쁜 일기 개수 : {badCount}</div>
+          <div>기분이 좋은 일기 비율 : {goodRatio}</div>
+          <DiaryList />
+        </div>
+      </DiaryDispatchContext.Provider>
+    </DiaryStateContext.Provider>
   );
 }
 

@@ -1,10 +1,9 @@
-import React,{ useEffect, useRef, useState } from "react";
+import React,{ useContext, useEffect, useRef, useState } from "react";
+import { DiaryDispatchContext } from "./App";
 
-const DiaryItem = ({author, content, created_date, emotion, id, onEdit, onRemove}) => {
+const DiaryItem = ({author, content, created_date, emotion, id }) => {
   
-  useEffect(()=>{
-    console.log(`${id}번째 아이템 랜더`)
-  });
+  const {onRemove,onEdit} = useContext(DiaryDispatchContext);//Provider에서 받아옴.
 
   const [isEdit,setIsEdit] = useState(false); //수정중인지아닌지체크
   const toggleIsEdit = () => setIsEdit(!isEdit);
