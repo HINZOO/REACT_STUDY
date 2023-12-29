@@ -84,19 +84,19 @@ function App() {
     [] //함수의 data를 최신으로 업데이트 하면서 적용될 수 있도록 setData의 값을 함수형으로 전환하여 최신데이터가 들어오도록 설정한다.
   );
 
-  const onRemove = (targetId) =>{
+  const onRemove = useCallback( (targetId) =>{
     // console.log(`${targetId}가 삭제되었습니다.`)
-    const newDiaryList = data.filter((it) => it.id !== targetId);
-    // console.log(newDiaryList);
-    setData(newDiaryList)
-  }
+    setData(data => data.filter((it) => it.id !== targetId))
+  },[]
+  );
 
   //수정
-  const onEdit = (targetId,newContent) => {
-    setData(
+  const onEdit = useCallback((targetId,newContent) => {
+    setData((data) =>
       data.map((it)=> it.id===targetId ? {...it, content: newContent} : it)
     );//값을 전달하여 타겟아이디와 아이디가 같으면 해당 아이템의 기본요소는 그대로 두고 content만 new Content로 수정, 대상이 아니라면 기존값 유지.
-  }
+  },[]
+  );
   
 
   //일기들 중 기분이 졸은 일기가 몇개인지 카운팅해보고 비율도 구해보자.
