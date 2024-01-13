@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyButton from "./MyButton";
 import DiaryItem from "./DiaryItem";
@@ -18,8 +18,10 @@ const filterOptionList= [
 //--value : select가 어떤것을 선택하고 있는지
 //--onchange: select에 의해 바뀌는 값
 //--optionList: select의 값
-const ControlMenu = ({value, onChange, optionList}) =>{
-  return <select className="ControlMenu" value={value} onChange={(e)=> onChange(e.target.value)}>
+const ControlMenu = React.memo(({value, onChange, optionList}) =>{
+  // useEffect(()=>{ console.log("컨트롤메뉴")},[ControlMenu]);//메모적용랜더링확인
+  return (
+  <select className="ControlMenu" value={value} onChange={(e)=> onChange(e.target.value)}>
     {optionList.map((it,idx)=>(
       <option key={idx} value={it.value}>
       {it.name}
@@ -27,7 +29,11 @@ const ControlMenu = ({value, onChange, optionList}) =>{
     )
     )}
   </select>
-}
+  );
+}); 
+//React.memo(전달받는 prop이 바뀌지않으면 랜더링X)
+//컴포넌트화면을 인자로 받아서 강화된 컴포넌트를 제공 
+
 
 
 const DiaryList = ({diaryList})=>{
