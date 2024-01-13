@@ -93,6 +93,8 @@ useEffect(()=>{
   const localData = localStorage.getItem('diary');
   if(localData){//데이터가있을때만 내부로직 진행
     const diaryList = JSON.parse(localData).sort((a,b)=>parseInt(b.id) - parseInt(a.id));
+    
+    if(diaryList.length >= 1)
     dataId.current = parseInt(diaryList[0].id) + 1;
     //dataId를 설정할때 기존에 저장된 정보들로 오류가 생길 수 있으므로
     //다이어리 리스트를 sort 해서 가장 높은 아이디를 가진 0번째 인덱스값의 +1 을 해준다.
