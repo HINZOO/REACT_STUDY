@@ -1,67 +1,22 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryDispatchContext } from "./../App.js"
+import { getStringDate } from "../util/date.js"; 
+import { emotionList } from "../util/emotion.js";
 
 import MyButton from "./MyButton";
 import MyHeader from "./MyHeader";
 import EmotionItem from "./EmotionItem";
 
-const env = process.env;//process. Node.js에 기본으로 존재하는 전역객체 env는 환경변수를 의미함.
-env.PUBLIC_URL = env.PUBLIC_URL || "";
-//PUBLIC_URL 은  Create-React-App 에서 생성시 만들어주는 기본 환경변수
-//루트 수정에 관한 글 
-//https://bobbyhadz.com/blog/create-react-app-set-public-url
 
- const emotionList = [
-  {
-    emotion_id: 1 ,
-    emotion_img: process.env.PUBLIC_URL + `/assets/emotion1.png`,
-    emotion_descript:'완전 좋음'
-  },
-  {
-    emotion_id: 2 ,
-    emotion_img: process.env.PUBLIC_URL + `/assets/emotion2.png`,
-    emotion_descript:'좋음'
-  },
-  {
-    emotion_id: 3 ,
-    emotion_img: process.env.PUBLIC_URL + `/assets/emotion3.png`,
-    emotion_descript:'그럭저럭'
-  },
-  {
-    emotion_id: 4 ,
-    emotion_img: process.env.PUBLIC_URL + `/assets/emotion4.png`,
-    emotion_descript:'나쁨'
-  },
-  {
-    emotion_id: 5 ,
-    emotion_img: process.env.PUBLIC_URL + `/assets/emotion5.png`,
-    emotion_descript:'끔찍함'
-  },
-];
 
-export const getStringDate = (date) => {
-  let year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
-  if (month < 10) {
-    month = `0${month}`;
-  }
-  if (day < 10) {
-    day = `0${day}`;
-  }
-  return `${year}-${month}-${day}`;
-};
-
- 
-
-const DiaryEditor = () =>{  
+const DiaryEditor = ({isEdit, originData}) =>{  
   const contentRef = useRef();
   const [content, setContent] = useState("");
   const[emotion, setEmotion] = useState(3);
   const [date, setDate] = useState(getStringDate(new Date()));
   
-  const {onCreate} = useContext(DiaryDispatchContext);
+  const {onCreate, onEdit} = useContext(DiaryDispatchContext);
   const handleClickEmote = (emotion) => {
     setEmotion(emotion);
   }
@@ -72,14 +27,28 @@ const DiaryEditor = () =>{
       contentRef.current.focus();
       return;
     }
-    onCreate(date,content,emotion);
+    if(window.confirm(isEdit?"일기를 수정하시겠습니까?":"새로운 일기를 작성하시겠습니까?")){
+      if(!isEdit){//수정이 아닌경우 일기작성
+        onCreate(date,content,emotion);
+      }else{//수정인경우 일기수정
+        onEdit(originData.id,date,content,emotion);
+      }
+    }
     navigate("/",{replace: true });//작성완료시 홈으로 돌아가고 뒤로가기 안되게 함.
   }
+  useEffect(()=>{//isEdit이나 originData값이 들어오는경우에 변경됨.
+    if(isEdit){
+      setDate(getStringDate(new Date(parseInt(originData.date))));
+      setEmotion(originData.emotion);
+      setContent(originData.content);
+    }
+  },[isEdit,originData])
+
   
   return (   
     <div className="DiaryEditor">
       <MyHeader 
-      headText={"새 일기 쓰기"} 
+      headText={ isEdit? "일기수정하기" : "새 일기 쓰기"} 
       leftChild={
                   <MyButton 
                     text={"< 뒤로가기"}

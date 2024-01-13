@@ -301,6 +301,84 @@ header button{
   color: white;
 }
 
+/* DAIRY */
+.DiaryPage{
+
+}
+.DiaryPage section{
+  width: 100%;
+  margin-bottom: 100px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.DiaryPage h4{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.DiaryPage .diary_img_wrapper{
+  background-color: #e2e2e2;
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.DiaryPage .diary_img_wrapper_1{
+  background-color: #64c964;
+  color:white;
+}
+
+.DiaryPage .diary_img_wrapper_2{
+  background-color:  #9dd772;
+  color:white;
+}
+
+.DiaryPage .diary_img_wrapper_3{
+  background-color: #fdce17;
+  color:white;
+}
+
+.DiaryPage .diary_img_wrapper_4{
+  background-color: #fd8446;
+  color:white;
+}
+
+.DiaryPage .diary_img_wrapper_5{
+  background-color: #fd565f;
+  color:white;
+}
+
+.DiaryPage .emotion_descript{
+  font-size: 25px;
+}
+
+.DiaryPage .diary_content_wrapper{
+  width: 100%;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+  word-break: keep-all; /*줄을 바꿔야하는 상황이 생길때 단어를 쪼개서 내리지 않도록 한다.*/
+  overflow-wrap:break-word;/*줄바꿈을 강제로 하는 css*/
+}
+
+.DiaryPage .diary_content_wrapper p{
+  padding: 20px;
+  text-align: left;/*부모태그의 width가 100을가져야 왼쪽정렬됨.*/
+  font-size: 20px;
+  font-family: 'Noto Sans KR', sans-serif ;
+  font-weight: 400;
+  line-height: 2.5;/*줄과줄사이간격*/
+}
+
+
+
 /* .App{
   padding: 20px;
   font-family: 'Noto Sans KR', sans-serif; 
