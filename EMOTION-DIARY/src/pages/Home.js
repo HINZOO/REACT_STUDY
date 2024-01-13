@@ -23,7 +23,10 @@ const Home = () =>{
     const lastDay = new Date(
       curDate.getFullYear(),
       curDate.getMonth() + 1 ,
-      0
+      0,
+      23,
+      59,
+      59//시분초까지 영향을 미치므로 주의해야한다. 이설정을 안하면 31일자값이 나오지않음.
     ).getTime();//00년 0월 31일 또는 30일 해당월 마지막일.
   
     setData(
