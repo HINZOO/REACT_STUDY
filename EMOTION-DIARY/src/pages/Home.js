@@ -36,7 +36,6 @@ const Home = () =>{
  },[diaryList,curDate]); //curDate의 상태가 변하면 실행
 
  useEffect(()=>{
-  console.log(data);
  } , [data] );
 
  const increaseMonth = () => {
